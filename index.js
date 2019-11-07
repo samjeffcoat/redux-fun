@@ -6,10 +6,15 @@ function createStore (){
     // 4. update the state
 
     let state
+    let listeners = []
 
     const getState = () => state
 
-    const subscribe = () => {
+    const subscribe = (listener) => {
+        listeners.push(listener)
+        return () => {
+            listeners = listerners.filter((l)=> l !== listener )
+        }
 
     }
 
@@ -18,8 +23,3 @@ function createStore (){
         subscribe
     }
 }
-
-const store= createStore()
-store.subscribe(() => {
-
-})
